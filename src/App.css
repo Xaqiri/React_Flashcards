@@ -1,17 +1,25 @@
 .userCard {
   border: 1px solid black;
   padding: 1rem;
+  background: gray;
+  color: white;
 }
 
 .deckCard {
   border: 1px solid green;
   padding: 1rem;
+  background: gray;
+  color: white;
 }
 
 #info {
   width: 40%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-content: center;
+}
+
+#app {
+  margin: 1rem;
 }

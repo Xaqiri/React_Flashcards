@@ -1,0 +1,8 @@
+#nav-bar {
+    background: darkslategray;
+    color: white;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+}

@@ -2,7 +2,7 @@ import './Nav.css'
 
 const nav = () => {
     return (
-        <div>Flashcards</div>
+        <div id='nav-bar'>Flashcards</div>
     );
 };
 
