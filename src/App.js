@@ -1,57 +1,48 @@
 import './App.css';
 
 function App() {
-
+  const url = 'http://localhost:8080'
   const useEffect = () => {
 
+  }
+
+  const createElement = (i, type, parent) => {
+    const container = document.createElement('div')
+    container.classList.add(type)
+    for (let n = 0; n < Object.keys(i).length; n++) {
+      const d = document.createElement('div')
+      d.innerHTML = i[Object.keys(i)[n]]
+      container.appendChild(d)
+    }
+    parent.appendChild(container)
+    if (type === 'user') {
+      container.addEventListener('click', () => {
+        getDecks(i)
+      })
+    }
   }
 
   async function getUsers() {
     const info = document.getElementById('info')
     info.replaceChildren()
-    await fetch('http://localhost:8080/user/all', {'mode':'cors'})
-    .then(resp => {
-      return resp.json()
-    })
-    .then(resp => {
-      resp.forEach((i) => {
-        const user = document.createElement('div')
-        const id = document.createElement('div')
-        const name = document.createElement('div')
-        const pw = document.createElement('div')
-        id.innerHTML = i.id
-        name.innerHTML = i.name
-        pw.innerHTML = i.password
-        user.classList.add('userCard')
-        user.append(id)
-        user.append(name)
-        user.append(pw)
-        info.appendChild(user)
-      })
+    await fetch(url + '/user/all', {'mode':'cors'})
+    .then(resp => resp.json())
+    .then(resp => { 
+      resp.forEach((i) => createElement(i, 'user', info))
     })
   }
   
-  async function getDecks() {
+  async function getDecks(usr) {
     const info = document.getElementById('info')
     info.replaceChildren()
-    await fetch('http://localhost:8080/deck/all', {'mode':'cors'})
+    const path = !usr.name ? '/deck/all' : `/user/${usr.name}/decks`
+    await fetch(url + path, {'mode':'cors'})
     .then(resp => {
       return resp.json()
     })
     .then(resp => {
       resp.forEach((i) => {
-        const deck = document.createElement('div')
-        const id = document.createElement('div')
-        const name = document.createElement('div')
-        const user = document.createElement('div')
-        id.innerHTML = i.id
-        name.innerHTML = i.name
-        user.innerHTML = i.userId
-        deck.classList.add('deckCard')
-        deck.append(id)
-        deck.append(name)
-        deck.append(user)
-        info.appendChild(deck)
+        createElement(i, 'deck', info)
       })
     })
   }
@@ -59,12 +50,14 @@ function App() {
   async function getCards() {
     const info = document.getElementById('info')
     info.replaceChildren()
-    await fetch('http://localhost:8080/card/all', {'mode':'cors'})
+    await fetch(url + '/card/all', {'mode':'cors'})
     .then(resp => {
       return resp.json()
     })
     .then(resp => {
-      console.log(resp)
+      resp.forEach((i) => {
+        createElement(i, 'card', info)
+      })
     })
   }
 

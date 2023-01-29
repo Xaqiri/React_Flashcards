@@ -1,13 +1,23 @@
-.userCard {
+.user {
   border: 1px solid black;
-  padding: 1rem;
+  padding: 0.5rem;
+  margin-right: 1%;
   background: gray;
   color: white;
 }
 
-.deckCard {
+.deck {
   border: 1px solid green;
-  padding: 1rem;
+  padding: 0.5rem;
+  margin-right: 1%;
+  background: gray;
+  color: white;
+}
+
+.card {
+  border: 1px solid purple;
+  padding: 0.5rem;
+  margin-right: 1%;
   background: gray;
   color: white;
 }
@@ -16,8 +26,8 @@
   width: 40%;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  align-content: center;
+  /* justify-content: left; */
+  /* align-content: center; */
 }
 
 #app {
