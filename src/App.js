@@ -19,6 +19,10 @@ function App() {
       container.addEventListener('click', () => {
         getDecks(i)
       })
+    } else if (type === 'deck') {
+      container.addEventListener('click', () => {
+        getCards(i)
+      })
     }
   }
 
@@ -47,10 +51,11 @@ function App() {
     })
   }
   
-  async function getCards() {
+  async function getCards(usr) {
     const info = document.getElementById('info')
     info.replaceChildren()
-    await fetch(url + '/card/all', {'mode':'cors'})
+    const path = !usr.name ? '/card/all' : `/deck/${usr.name}/cards`
+    await fetch(url + path, {'mode':'cors'})
     .then(resp => {
       return resp.json()
     })
